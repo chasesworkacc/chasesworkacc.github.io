@@ -1,0 +1,169 @@
+:root {
+  /* Default double border configuration */
+  --win31-border-width: 3px;
+  --win31-border-space: 1px;
+  --win31-border-line-color: #000000;
+  --win31-border-space-color: #c0c0c0;
+}
+
+/* windows 3.1 style double border */
+.win31-border {
+    border: calc(round(up, calc(var(--win31-border-width) / 2), 1px) - var(--win31-border-space)) solid var(--win31-border-line-color); 
+    box-shadow:
+        0 0 0 var(--win31-border-space) var(--win31-border-space-color),
+        0 0 0 calc(var(--win31-border-width) - var(--win31-border-space)) var(--win31-border-line-color);
+    margin: calc(var(--win31-border-width) - 1px);
+
+    /* border: 1px solid #000000;
+    box-shadow: 
+    0 0 0 1px #c0c0c0,
+    0 0 0 2px #000000;
+    margin: 2px; */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tachoma', sans-serif;
+    background-color: #c0c0c0;
+    font-size: 12pt;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    padding: 8px;
+}
+
+/* Menu styling */
+.menu {
+    background-color: #ffffff;
+    
+    padding: 4px;
+
+    display: flex;
+    z-index: 100;
+}
+
+.menu-item {
+    padding: 8px 8px;
+    cursor: pointer;
+    /* font-weight: normal; */
+    font-size: 11pt;
+    color: #000000;
+    /* user-select: none; */
+    text-decoration: none;
+}
+
+.menu-item:hover {
+    background-color: #dfdfdf;
+}
+
+.menu-item.active {
+    background-color: #000080;
+    color: #ffffff;
+}
+
+/* Content area */
+.content {
+    background-color: #ffffff;
+    flex-grow: 1;
+    padding: 4px;
+    display: flex;
+    overflow-y: auto;
+}
+
+.content-inner {
+    padding: 50px 50px;
+    width: 100%;
+}
+
+#chaser {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  pointer-events: none;
+  display: none;
+}
+
+/* Portrait layout (mobile) */
+@media (orientation: portrait) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .menu {
+        flex-direction: row;
+        /* justify-content: center; */
+        margin-bottom: 8px;
+        /* position: sticky; */
+        top: 0;
+    }
+
+    .menu-item {
+        margin-right: 2px;
+        /* padding: 8px 16px; */
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+    }
+    
+    /* .content {
+        margin: 8px;
+        margin-top: 0;
+    } */
+}
+
+/* Landscape layout (desktop) */
+@media (orientation: landscape) {
+    .container {
+        flex-direction: row;
+        max-width: 1000px;
+        margin: 0px auto;
+    }
+    
+    .menu {
+        flex-direction: column;
+        /* width: 40px; Made narrower since text is rotated */
+        margin-right: 8px;
+        height: fit-content;
+    }
+    
+    .menu-item {
+        margin-bottom: 2px;
+        /* padding: 8px 8px; */
+        writing-mode: vertical-lr;
+        text-orientation: mixed;
+        /* height: 80px;  Fixed height for consistent appearance */
+        /* min-height: 80px; */
+    }
+}
+
+h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #000080;
+}
+
+h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #000000;
+}
+
+h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #000000;
+} 
+
+p {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}

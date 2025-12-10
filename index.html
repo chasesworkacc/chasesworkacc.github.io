@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>PhD Application Showcase</title> -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="menu win31-border">
+            <a class="menu-item" href="#Home">Home</a>
+            <a class="menu-item" href="#VisNav">VisNav</a>
+            <a class="menu-item" href="#CV">CV</a>
+            <a class="menu-item" href="#Contact">Contact</a>
+        </nav>
+
+        <div class="content win31-border">
+            <!-- populated by js -->
+        </div>
+    </div>
+
+    <img id="chaser" src="assets/yp.gif" alt="yp gif">
+
+    <script>
+         // Load content based on URL hash on page load
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.slice(1) || 'Home';
+            
+            showSection(hash);
+        });
+
+        document.querySelectorAll('.menu-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Allow the hash to change first
+                setTimeout(() => {
+                    location.reload();
+                }, 0);
+            });
+        });
+
+        window.addEventListener("popstate", function () {
+            window.location.reload();
+        });
+        
+        async function showSection(pageName) {
+            try {
+                const menuItems = document.querySelectorAll('.menu-item');
+                menuItems.forEach(item => {
+                    if (item.textContent === pageName) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                // Fetch and load content
+                const response = await fetch(`content/${pageName}.html`,{cache:"no-store"});
+                const content = await response.text();
+                document.querySelector('.content').innerHTML = content;
+                
+                // special case for chaser on yp page
+                if (pageName === "VisNav") {
+                    engageChaser();
+                }
+            } catch (error) {
+                console.error('Error loading content:', error);
+            }
+        }
+        
+
+        function engageChaser() {
+            const chaser = document.getElementById("chaser");
+            let mouseX = 0, mouseY = 0;
+            let currentX = 0, currentY = 0;
+            
+            document.addEventListener("mousemove", (event) => {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+            });
+
+            chaser.style.display = "block";
+
+            function animateChaser() {
+                // Smoothly move toward mouse
+                currentX += (mouseX - currentX) * 0.05;
+                currentY += (mouseY - currentY) * 0.05;
+                
+                // Get GIF dimensions
+                const gifWidth = chaser.offsetWidth;
+                const gifHeight = chaser.offsetHeight;
+                
+                // Get viewport size
+                const maxX = document.documentElement.clientWidth - gifWidth;
+                const maxY = document.documentElement.clientHeight - gifHeight;
+                
+                // Clamp values so GIF stays inside viewport
+                const clampedX = Math.max(0, Math.min(currentX, maxX));
+                const clampedY = Math.max(0, Math.min(currentY, maxY));
+                
+                chaser.style.left = clampedX + "px";
+                chaser.style.top = clampedY + "px";
+                
+                requestAnimationFrame(animateChaser);
+            }
+
+            animateChaser();
+        }
+    </script>
+</body>
+</html>

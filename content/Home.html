@@ -1,0 +1,28 @@
+<div class="content-inner">
+    <h1>Charles Ballentine, Ph.D. Hopeful</h1>
+
+    <h2>Research Interest</h2>
+    <p>
+    I am applying for Ph.D. programs to persue my interest in robotic learning, particularly in directions involving the semantic understanding and reasoning capabilities of MLLMs.
+    </p>
+    <h2>Statement of Purpose</h2>
+    <p>
+    For the past two years, I have led the effort to develop a <a href='#VisNav'>system</a> to fully autonomously land aircraft on underway naval vessels. It does this without cheating: it uses camera and IMU only (no GPS) on edge hardware with a real Navy ship. I did it on time, with closed-loop demonstrations and proper Navy flight tests using a small demo drone. I did this work on a grant-funded team of three, despite none of us having a formal background in computer science or machine learning. I am proud of our work here, but I know this project only scratches the surface of modern robotics research. 
+    </p>
+    <p>
+    Through working on autonomy, I have become fascinated by deep learning approaches to robotics, particularly <em>multimodal generalist robotics models</em>, <em>world modeling</em>, and <em>real-world, goal-oriented reinforcement learning</em>. It seems we’re on the cusp of robots that go beyond industrial or military settings to directly, materially improve people’s everyday lives (and also do the industrial and military tasks along the way). However, going beyond my practical engineering knowledge to a deep understanding of machine learning is a tall order while having a full-time job. The rigor of graduate coursework and furthering the research I have become passionate about are why I am pursuing a Ph.D.
+    </p>
+    <h3>Work and Research Background</h3>
+    <p>
+    To be candid, I wasn’t sure where to go after my undergrad in Aerospace. “More earnin’, less learnin’,” my dad said, so I started at Navair in 2020. Working from home during COVID, I used the ample spare time to do some hobby programming with data from work. Finding that I enjoyed this, I asked to join a flight simulator team so I could program full-time. I read a couple C++ books and got to work on some unglamorous tasking (I once spent an entire day profiling exactly what variation of sprintf we should use for logging, during which I found nonstandard behavior in Microsoft’s compiler). Eventually, I took the lead on designing and implementing a plugin system to allow my team’s weapon launch simulations to interact with the larger simulation environment, replacing the low-fidelity videogame-style weapons pilots had been using for training. Although this was not a research position, it made me proficient with systems software architecture, high fidelity physics simulation, real-time networking, and distributed computing, which are all of use in robotics research. This work was of high quality; I prided myself on going out and learning not only the “right way” to do things, but why that way was right.
+    </p>
+    <p>
+    After finishing this plugin system, I talked my way onto a team researching advanced control theory and autonomy for UAVs, the only full-time research team in our organization of over three thousand. I got in to clean up their codebases, but I quickly became smitten with a ship auto landing project, which we call VisNav. VisNav (I learned) is built around a fairly simple pose detection, P<em>n</em>P, and Kalman filter 6DoF pose estimator. It existed at a conceptual stage; I became lead and often sole researcher on the project, planning and performing data collection, training and evaluating models, implementing and tuning the entire vision and controls stack and, through a months-long process akin to being repeatedly kicked in the face, getting it to run and fly on our embedded compute devices. <em>As difficult as it was, this project is the most rewarding thing I’ve ever done, and it convinced me I want to make a career of research.</em>
+    </p>
+    <p>
+    During this project, I helped a visiting Ph.D. student implement a novel relative pose Kalman filter on direct keypoint detections. My modular architecture let him run his filter right away, both in flight and on sample data, with almost no integration work. Visualization tools I had written also helped us diagnose and fix his filter’s relative motion model, which is a very tedious task without real-time, real-world feedback. I learned a lot about state estimation, but it was also a case study on how to enable research collaboration, even across projects. My architecture is now the standard for my lab.
+    </p>
+    <p>
+    I also had the opportunity to learn about synthetic imagery generation and scene reconstruction. I noticed during some early training runs that almost no transfer learning was happening using our synthetic datasets, so I studied how to make synthetic environments more realistic. I explored gaussian splatting quite a bit, but I ended up doing a more traditional photogrammetry scan of our ship, because the results were more flexible. After some other graphics work, the resulting renders were truly photorealistic. This imagery took our model from not working directly above the landing zone, where real world data collection is difficult, to having positional accuracy within a foot all the way to the ground. 
+    </p>
+</div>
