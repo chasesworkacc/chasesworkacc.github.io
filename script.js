@@ -46,7 +46,7 @@ async function showSection(pageName) {
 // show and animate yp gif chasing mouse
 function engageChaser() {
     const chaser = document.getElementById("chaser");
-    chaser.style.visibility = "visible";
+    chaser.style.display = "block";
 
     let currentX = document.documentElement.clientWidth / 2 - chaser.clientWidth / 2;
     let currentY = document.documentElement.clientHeight / 2 - chaser.clientHeight / 2;

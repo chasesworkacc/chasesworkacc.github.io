@@ -89,7 +89,7 @@ body {
   max-width: 20vw;
   max-height: 20vh;
   pointer-events: none;
-  visibility: hidden;
+  display: none;
 }
 
 /* Portrait layout (mobile) */
