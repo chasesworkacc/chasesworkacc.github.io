@@ -1,14 +1,14 @@
 :root {
   /* Default double border configuration */
-  --win31-border-width: 3px;
-  --win31-border-space: 1px;
+  --win31-border-width: 6px;
+  --win31-border-space: 2px;
   --win31-border-line-color: #000000;
   --win31-border-space-color: #c0c0c0;
 }
 
 /* windows 3.1 style double border */
 .win31-border {
-    border: calc(round(up, calc(var(--win31-border-width) / 2), 1px) - var(--win31-border-space)) solid var(--win31-border-line-color); 
+    border: calc(var(--win31-border-width) / 2 - var(--win31-border-space) / 2) solid var(--win31-border-line-color);
     box-shadow:
         0 0 0 var(--win31-border-space) var(--win31-border-space-color),
         0 0 0 calc(var(--win31-border-width) - var(--win31-border-space)) var(--win31-border-line-color);
