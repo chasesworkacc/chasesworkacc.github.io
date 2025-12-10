@@ -1,7 +1,6 @@
-// Load content based on URL hash on page load
-window.addEventListener('load', () => {
-    const hash = window.location.hash.slice(1) || 'Home';    
-    showSection(hash);
+// force reload on back/forward navigation
+window.addEventListener("popstate", function () {
+    window.location.reload();
 });
 
 // highlight the correct menu item
@@ -14,11 +13,11 @@ document.querySelectorAll('.menu-item').forEach(link => {
     });
 });
 
-// force reload on back/forward navigation
-window.addEventListener("popstate", function () {
-    window.location.reload();
+// Load content based on URL hash on page load
+window.addEventListener('load', () => {
+    const hash = window.location.hash.slice(1) || 'Home';    
+    showSection(hash);
 });
-
 
 async function showSection(pageName) {
     try {
@@ -57,6 +56,7 @@ function engageChaser() {
         mouseY = event.pageY - chaser.clientHeight / 2;
     });
 
+    // side note: pleasantly surprised how nice js closures are
     function animateChaser() {
         // Smoothly move toward mouse
         currentX += (mouseX - currentX) * 0.05;
@@ -82,3 +82,32 @@ function engageChaser() {
 
     animateChaser();
 }
+
+// set cool background
+function setCoolBackground() {
+    const backgrounds = [
+        "256color.bmp",
+        "cars.bmp",
+        "flock.bmp",
+        "marble.bmp",
+        "tartan.bmp",
+        "arcade.bmp",
+        "castle.bmp",
+        "gray.bmp",
+        "redbrick.bmp",
+        "thatch.bmp",
+        "arches.bmp",
+        "chitz.bmp",
+        "honey.bmp",
+        "rivets.bmp",
+        "zigzag.bmp",
+        "argyle.bmp",
+        "egypt.bmp",
+        "leaves.bmp",
+        "squares.bmp"
+    ];
+    
+    const randomBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+    document.body.style.backgroundImage = `url('assets/backgrounds/${randomBg}')`;
+}
+setCoolBackground();

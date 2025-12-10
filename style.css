@@ -29,8 +29,8 @@
 
 body {
     font-family: 'Tachoma', sans-serif;
-    background-color: #c0c0c0;
     font-size: 12pt;
+    background-repeat: repeat;
 }
 
 .container {
