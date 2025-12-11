@@ -97,16 +97,6 @@ body {
     overflow: auto;
 }
 
-#chaser {
-  position: absolute;
-  width: auto;
-  height: auto;
-  max-width: 20vw;
-  max-height: 20vh;
-  pointer-events: none;
-  display: none;
-}
-
 #app-container {
     display: flex;
     flex-grow: 1;

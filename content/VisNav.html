@@ -10,3 +10,57 @@
     <p>This is done fully autonomously and uses only a single camera and IMU, no GPS or lidar. It runs realtime on the drone's embedded computer.</p>
     <p>I am limited on what I can publicly post regarding this project. Please contact me for more information.</p>
 </div>
+    
+<img id="chaser" src="assets/yp.gif" alt="yp gif" style="
+    position: fixed;
+    width: auto;
+    height: auto;
+    max-width: 20vw;
+    max-height: 20vh;
+    pointer-events: none;
+    display: none;
+">
+
+<script>
+    // show and animate yp gif chasing mouse
+    function engageChaser() {
+        const chaser = document.getElementById("chaser");
+        chaser.style.display = "block";
+
+        let currentX = document.documentElement.clientWidth / 2 - chaser.clientWidth / 2;
+        let currentY = document.documentElement.clientHeight / 2 - chaser.clientHeight / 2;
+        let mouseX = currentX, mouseY = currentY;
+        
+        document.addEventListener("mousemove", (event) => {
+            mouseX = event.pageX - chaser.clientWidth / 2;
+            mouseY = event.pageY - chaser.clientHeight / 2;
+        });
+
+        // side note: pleasantly surprised how nice js closures are
+        function animateChaser() {
+            // Smoothly move toward mouse
+            currentX += (mouseX - currentX) * 0.05;
+            currentY += (mouseY - currentY) * 0.05;
+            
+            // Get GIF dimensions
+            const gifWidth = chaser.offsetWidth;
+            const gifHeight = chaser.offsetHeight;
+            
+            // Get viewport size
+            const maxX = document.documentElement.clientWidth - gifWidth;
+            const maxY = document.documentElement.clientHeight - gifHeight;
+            
+            // Clamp values so GIF stays inside viewport
+            const clampedX = Math.max(0, Math.min(currentX, maxX));
+            const clampedY = Math.max(0, Math.min(currentY, maxY));
+            
+            chaser.style.left = clampedX + "px";
+            chaser.style.top = clampedY + "px";
+            
+            requestAnimationFrame(animateChaser);
+        }
+
+        animateChaser();
+    }
+    engageChaser();
+</script>
