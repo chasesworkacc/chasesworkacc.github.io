@@ -2,12 +2,15 @@
   /* Default double border configuration */
   --win31-border-width: 6px;
   --win31-border-space: 2px;
+  --win31-border-corner-offset: 30px;
   --win31-border-line-color: #000000;
   --win31-border-space-color: #c0c0c0;
 }
 
 /* windows 3.1 style double border */
-.win31-border {
+.win31-border, .win31-border-with-handles {
+    position: relative;
+
     border: calc(var(--win31-border-width) / 2 - var(--win31-border-space) / 2) solid var(--win31-border-line-color);
     box-shadow:
         0 0 0 var(--win31-border-space) var(--win31-border-space-color),
@@ -21,6 +24,47 @@
     margin: 2px; */
 }
 
+/* "resize handles" in corners */
+.win31-border-with-handles::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+
+    /* border thickness */
+    --l: calc( var(--win31-border-corner-offset) + var(--win31-border-space) );   /* line length from corner */
+    --s: var(--win31-border-corner-offset); /*1px;   /* size of corner cut */
+  
+    left: calc(0px - (var(--win31-border-width) / 2 + var(--win31-border-space) / 2));
+    right: calc(0px - (var(--win31-border-width) / 2 + var(--win31-border-space) / 2));
+    top: calc(0px - (var(--win31-border-width) / 2 + var(--win31-border-space) / 2));
+    bottom: calc(0px - (var(--win31-border-width) / 2 + var(--win31-border-space) / 2));
+
+    border: var(--win31-border-space) solid var(--win31-border-line-color);
+    /* background-color: #f00a; */
+
+    /* This masks the middle sections */
+    mask:
+        /* Horizontal mask (keeps ends, hides middle) */
+        linear-gradient(to right, 
+            #000 var(--l), 
+            transparent 0, 
+            transparent calc(100% - var(--l)), 
+            #000 0),
+            
+        /* Vertical mask (keeps ends, hides middle) */
+        linear-gradient(to bottom, 
+            #000 var(--l), 
+            transparent 0, 
+            transparent calc(100% - var(--l)), 
+            #000 0),
+            
+        conic-gradient(at var(--s) var(--s), #000 75%, #0000 0)
+        0 0 / calc(100% - var(--s)) calc(100% - var(--s))  ;
+      
+    mask-composite: intersect;
+ 
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -31,11 +75,42 @@ body {
     font-family: 'Tachoma', sans-serif;
     font-size: 12pt;
     background-repeat: repeat;
+    height: 100vh;
+    display: flex;
 }
 
-.container {
+/* Content area */
+.content-area {
+    background-color: #ffffff;
+    padding: 4px;
+    /* width: fit-content; */
     display: flex;
-    min-height: 100vh;
+    flex-grow: 1;
+    /* width: 100%; */
+    /* overflow: auto; */
+    scrollbar-color: #c0c0c0 #ffffff;
+}
+
+.content {
+    padding: 50px 50px;
+    width: 100%;
+    overflow: auto;
+}
+
+#chaser {
+  position: absolute;
+  width: auto;
+  height: auto;
+  max-width: 20vw;
+  max-height: 20vh;
+  pointer-events: none;
+  display: none;
+}
+
+#app-container {
+    display: flex;
+    flex-grow: 1;
+    /* min-height: 100vh; */
     padding: 8px;
 }
 
@@ -46,7 +121,6 @@ body {
     padding: 4px;
 
     display: flex;
-    z-index: 100;
 }
 
 .menu-item {
@@ -68,33 +142,9 @@ body {
     color: #ffffff;
 }
 
-/* Content area */
-.content {
-    background-color: #ffffff;
-    flex-grow: 1;
-    padding: 4px;
-    display: flex;
-    overflow-y: auto;
-}
-
-.content-inner {
-    padding: 50px 50px;
-    width: 100%;
-}
-
-#chaser {
-  position: absolute;
-  width: auto;
-  height: auto;
-  max-width: 20vw;
-  max-height: 20vh;
-  pointer-events: none;
-  display: none;
-}
-
 /* Portrait layout (mobile) */
 @media (orientation: portrait) {
-    .container {
+    #app-container {
         flex-direction: column;
     }
     
@@ -121,21 +171,22 @@ body {
 
 /* Landscape layout (desktop) */
 @media (orientation: landscape) {
-    .container {
+    #app-container {
         flex-direction: row;
         max-width: 1000px;
-        margin: 0px auto;
+        height: min(100vh, 900px);
+        margin: auto auto;
     }
     
     .menu {
         flex-direction: column;
-        /* width: 40px; Made narrower since text is rotated */
+        gap: 2px;
         margin-right: 8px;
         height: fit-content;
     }
     
     .menu-item {
-        margin-bottom: 2px;
+        /* margin-bottom: 2px; */
         /* padding: 8px 8px; */
         writing-mode: vertical-lr;
         text-orientation: mixed;

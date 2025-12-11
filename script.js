@@ -31,7 +31,7 @@ async function showSection(pageName) {
         // Fetch and load content
         const response = await fetch(`content/${pageName}.html`, {cache:"no-store"});
         const content = await response.text();
-        document.querySelector('.content').innerHTML = content;
+        document.querySelector('.content-area').innerHTML = content;
         
         // special case for chaser on yp page
         if (pageName === "VisNav") {
