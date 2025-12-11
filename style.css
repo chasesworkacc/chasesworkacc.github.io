@@ -75,7 +75,7 @@ body {
     font-family: "Microsoft Sans Serif", "Helv", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 12pt;
     background-repeat: repeat;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
 }
 
@@ -111,6 +111,7 @@ body {
     display: flex;
     flex-grow: 1;
     /* min-height: 100vh; */
+    min-height: fit-content;
     padding: 8px;
 }
 
@@ -153,7 +154,7 @@ body {
         /* justify-content: center; */
         margin-bottom: 8px;
         /* position: sticky; */
-        top: 0;
+        /* top: 0; */
     }
 
     .menu-item {
@@ -174,7 +175,7 @@ body {
     #app-container {
         flex-direction: row;
         max-width: 1000px;
-        height: min(100vh, 900px);
+        height: min(100%, 900px);
         margin: auto auto;
     }
     
