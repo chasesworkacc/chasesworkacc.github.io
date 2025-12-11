@@ -164,7 +164,7 @@ body {
 @media (orientation: landscape) {
     #app-container {
         flex-direction: row;
-        max-width: 1000px;
+        max-width: min(100%, 1000px);
         height: min(100%, 900px);
         margin: auto auto;
     }

@@ -1,8 +1,50 @@
-<div class="content" style="padding:0; margin:0; display: flex;">
-    <!-- <h1>Curriculum Vitae</h1> -->
-
-    <iframe src="assets/cv.pdf" style="flex-grow: 1; min-height:360px; border: 0px;" type="application/pdf">
+<div class="content" style="padding:0; margin:0; display: flex; align-items: center;">
+    <!-- <iframe src="assets/cv.pdf" style="flex-grow: 1; min-height:360px; border: 0px;" type="application/pdf">
         <p>Your browser does not support PDF viewing. 
         <a href="assets/cv.pdf">Download my CV here</a>.</p>
+    </iframe> -->
+
+    <iframe
+        src="https://drive.google.com/viewerng/viewer?embedded=true&url=http://chasesworkacc.github.io/assets/cv.pdf"
+        id="pdf-frame"
+        style="flex-grow: 1; height: 100%; min-height:360px; border: 0;">
     </iframe>
+
+    <div id="pdf-fallback" style="display:none; padding: 16px;">
+        <p>Embedding a pdf into a website and having it work on mobile is surprisingly difficult, and my solution seems to have broken. 
+        <a href="assets/cv.pdf">You can directly download my CV here</a>.
+        </p>
+    </div>
 </div>
+
+<script>
+    const iframe = document.getElementById("pdf-frame");
+    const fallback = document.getElementById("pdf-fallback");
+    
+    // I hate having to hack to match the pdf viewer color
+    iframe.parentElement.parentElement.style.backgroundColor = "#212121";
+
+    fetch(iframe.src, { mode: 'no-cors' }).then((response) => {
+        console.debug("PDF viewer loaded successfully");
+    }).catch((error) => {
+        console.debug("PDF viewer failed to load, showing fallback");
+
+        iframe.parentElement.parentElement.style.backgroundColor = "white";
+
+        iframe.style.display = "none";
+        fallback.style.display = "block";
+    });
+
+    // // If iframe loads, mark success
+    // iframe.onload = () => {
+    //     loaded = true;
+    // };
+
+    // // After 5 seconds, if not loaded, show fallback
+    // setTimeout(() => {
+    //     if (!loaded) {
+    //         iframe.style.display = "none";
+    //         fallback.style.display = "block";
+    //     }
+    // }, 3000);
+</script>
