@@ -195,6 +195,13 @@ body {
     }
 }
 
+/* small window */
+@media (max-width: 768px) or (max-height: 480px) {
+    .content {
+        padding: 10px;
+    }
+}
+
 h1 {
     font-size: 16pt;
     font-weight: bold;
